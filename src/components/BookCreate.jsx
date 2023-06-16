@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 function BookCreate({ onBookCreate }) {
 
     const [title, setTitle] = useState('')
@@ -8,20 +7,22 @@ function BookCreate({ onBookCreate }) {
         setTitle(event.target.value)
     }
     const handleSubmit = (event) => {
-       event.preventDefault();
-       onBookCreate(title);
+       event.preventDefault()
+       onBookCreate(title)
        setTitle('')
     }
     return (
-        <div>
+        <div className="book-create">
+            <h3>Add a Book</h3>
             <form onSubmit={handleSubmit}>
                 <label>Title</label>
                 <input 
+                    className="input"
                     type="text"
                     value={title}
                     onChange={handleChange}
                 />
-                <button>Add Book</button>
+                <button className="button">Add Book</button>
             </form>
         </div>
     );
