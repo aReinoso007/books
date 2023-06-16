@@ -7,6 +7,11 @@ function App (){
 
     const handleBookCreate= (title) =>{
         console.log('title: ', title)
+        const updatedBooks = [
+            ...books,
+            {id: 123, title: title}
+        ]
+        setBooks(updatedBooks)
     }
 
     const handleBookEdit = () =>{
@@ -15,6 +20,7 @@ function App (){
 
     return (
         <div>
+            {books.length}
             <BookCreate onBookCreate={handleBookCreate}/>
         </div>
     )
