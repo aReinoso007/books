@@ -21,3 +21,6 @@ This is a short app that lets the user create new books and edit them. Its made 
         setColors(updatedColors);
     };
 ```
+
+## Adding elements to the middle of an array
+For this we will use ```.slice```. Its used to return a number of elements, like a collection of an array
