@@ -15,7 +15,7 @@ This is a short app that lets the user create new books and edit them. Its made 
         */
         const addColors = (newColor)=>{
         const updatedColors = [//-> creating new array
-            ...colors.slice(0, index), //-> add all elements from the existing 'colors' array
+            ...colors, //-> add all elements from the existing 'colors' array
             newColor, //-> adding element
         ];
         setColors(updatedColors);
@@ -27,8 +27,10 @@ For this we will use ```.slice```. Its used to return a number of elements, like
 ```javascript
     const addColorsAtIndex = (newColor, index)=>{
         const updatedColors = [
+            ...colors.slice(0, index),
             newColor,
-            colors.slice(index)
+            newColor,
+            ...colors.slice(index)
         ];
         setColors(updatedColors);
     }
