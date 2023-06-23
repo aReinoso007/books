@@ -27,11 +27,26 @@ For this we will use ```.slice```. Its used to return a number of elements, like
 ```javascript
     const addColorsAtIndex = (newColor, index)=>{
         const updatedColors = [
-            ...colors.slice(0, index),
-            newColor,
-            newColor,
-            ...colors.slice(index)
+            ...colors.slice(0, index), //we get from the first element to a given index
+            newColor, //adding the new color before the index
+            ...colors.slice(index) // add it all together, from the index to the end of the array
         ];
         setColors(updatedColors);
     }
+```
+
+## Removing elements from an array
+* filtering a value
+```javascript
+    const [colors, setColors] = useState([
+        'red','green','blue'
+    ]);
+    
+    const removeColor = (colorToRemove) =>{
+        const updatedColors = colors.filter((color)=>{
+            return !== colorToRemove
+        });
+        setColors(updatedColors);
+    }
+
 ```
