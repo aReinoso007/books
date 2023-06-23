@@ -74,7 +74,7 @@ For this we will use ```.slice```. Its used to return a number of elements, like
     const updateBookById = (id, newTitle)=>{
         const updatedBooks = books.map((book)=>{
             if(book.id === id){
-                return {...book, title : newTitle};
+                return {...book, title : newTitle}; //recreating object and adding new title
             }
             return book;
         });
