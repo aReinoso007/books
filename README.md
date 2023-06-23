@@ -82,3 +82,7 @@ For this we will use ```.slice```. Its used to return a number of elements, like
     }
 
 ```
+why this syntax ``` return {...book, title : newTitle} ```?
+Why do we create a new object of book when we find the book with
+the given id?
+This is because of the state management in REACT, when React sees that we're working with the same array then its not going to notice the change, so there wont be a re-render and create bugs. When modifying the object that way we avoid bugs.
