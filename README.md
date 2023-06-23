@@ -44,9 +44,41 @@ For this we will use ```.slice```. Its used to return a number of elements, like
     
     const removeColor = (colorToRemove) =>{
         const updatedColors = colors.filter((color)=>{
-            return !== colorToRemove
+            return color !== colorToRemove
         });
         setColors(updatedColors);
+    }
+
+    /*Filter by an id */
+
+    const [books, setBooks] = useState([
+        {id: 1,title:'Demian'},
+        {id: 2, title:'Necronomicon'}
+    ])
+
+    const removeBookById = (id)=>{
+        const updatedBooks = books.filter((book)=>{
+            return book.id !==id
+        });
+        setBooks(updatedBooks);
+    }
+
+```
+* editing elements based on a property
+```javascript
+    const [books, setBooks] = useState([
+        {id: 1,title:'Demian'},
+        {id: 2, title:'Necronomicon'}
+    ])
+
+    const updateBookById = (id, newTitle)=>{
+        const updatedBooks = books.map((book)=>{
+            if(book.id === id){
+                return {...book, title : newTitle};
+            }
+            return book;
+        });
+        setBooks(updatedBooks);
     }
 
 ```
