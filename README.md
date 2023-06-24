@@ -64,7 +64,7 @@ For this we will use ```.slice```. Its used to return a number of elements, like
     }
 
 ```
-* editing elements based on a property
+* editing element in array based on a property
 ```javascript
     const [books, setBooks] = useState([
         {id: 1,title:'Demian'},
@@ -86,3 +86,40 @@ why this syntax ``` return {...book, title : newTitle} ```?
 Why do we create a new object of book when we find the book with
 the given id?
 This is because of the state management in REACT, when React sees that we're working with the same array then its not going to notice the change, so there wont be a re-render and create bugs. When modifying the object that way we avoid bugs.
+
+* Adding or changing properties to an object
+
+```javascript
+    const [fruit, setFruit] = useState({
+        color: 'red',
+        name: 'apple'
+    });
+
+    const changeColor = (color)=>{
+        const updatedFruit = {
+            ...fruit, //copies all the properties of the object
+            color: color
+        };
+
+        setFruit(updatedFruit);
+    }
+```
+* Removing properties from an object.
+For this destructuring is used
+```javascript
+
+    const [fruit, setFruit] = useState({
+        color: 'red',
+        name: 'apple'
+    });
+
+    const removeColor = ()=>{
+        const {
+            color, //list the property to remove
+            ...rest //get all the other properties from the object
+            } = fruit
+
+        setFruit(rest);
+    }
+
+```
