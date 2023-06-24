@@ -15,7 +15,7 @@ function App (){
         setBooks(updatedBooks)
     }
 
-    const deleteBookById = (id)=>{
+    const deleteBookById = (id) =>{
         const updatedBooks = books.filter((book)=>{
             return book.id !== id;
         });
@@ -28,7 +28,7 @@ function App (){
 
     return (
         <div className="app">
-            <BookList books={books}/>
+            <BookList books={books} onDelete={deleteBookById} />
             <BookCreate onBookCreate={handleBookCreate}/>
         </div>
     )
