@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BookCreate from "./components/BookCreate";
+import BookList from "./components/BookList";
 import './index.css'
 
 function App (){
@@ -9,8 +10,15 @@ function App (){
         console.log('title: ', title)
         const updatedBooks = [
             ...books,
-            {id: 123, title: title}
+            {id: Math.round(Math.random()*999), title}
         ]
+        setBooks(updatedBooks)
+    }
+
+    const deleteBookById = (id)=>{
+        const updatedBooks = books.filter((book)=>{
+            return book.id !== id;
+        });
         setBooks(updatedBooks)
     }
 
@@ -19,8 +27,8 @@ function App (){
     }
 
     return (
-        <div>
-            {books.length}
+        <div className="app">
+            <BookList books={books}/>
             <BookCreate onBookCreate={handleBookCreate}/>
         </div>
     )
