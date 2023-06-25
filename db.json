@@ -1,3 +1,8 @@
 {
-    "books":[]
+  "books": [
+    {
+      "title": "Alex and the cats",
+      "id": 1
+    }
+  ]
 }
