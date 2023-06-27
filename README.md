@@ -123,3 +123,24 @@ For this destructuring is used
     }
 
 ```
+
+### useEffect
+There are 3 ways of using it:
+1. We want to call a function once when the component first renders
+```javascript
+    useEffect(()=>{
+        console.log('hi')
+    }, [])    
+```
+2. To call function after every rerender.
+```javascript
+    useEffect(()=>{
+        console.log('hi')
+    });
+```
+3. To call a function after component rerenders and a value has changed.
+```javascript
+    useEffect(()=>{
+        console.log('hi')
+    }, [counter])
+```
