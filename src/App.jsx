@@ -22,8 +22,6 @@ function App (){
         {
            title
         });
-
-        console.log(response)
        const updatedBooks = [
             ...books,
             response.data
@@ -46,7 +44,7 @@ function App (){
 
     const deleteBookById = async (id) =>{
         const response = await axios.delete(`http://localhost:3001/books/${id}`)
-        
+
         const updatedBooks = books.filter((book)=>{
             return book.id !== id;
         });

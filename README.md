@@ -144,3 +144,24 @@ There are 3 ways of using it:
         console.log('hi')
     }, [counter])
 ```
+
+## Communication using the Context System
+This allows us to share data appwise instead of using props in components that have a parent-child relationship. Context is nor Redux nor a replacement for Props.
+```javascript createContext``` from ```react``` is used.
+1. Create context.
+```javascript
+    const BookContext = createContext();
+    /*
+    the BookContext obj has a Provider and a Consumer
+    The provider specifies what data we want to share.
+    <BookContext.Provider />
+    */
+```
+2. Specify the data that will be shared.
+```javascript
+    <BookContext.Provider value={5}>
+        <MyComponent />
+    </BookContext.Provider>
+```
+3. 'Consume' the data in a component
+
