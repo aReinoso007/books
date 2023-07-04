@@ -164,4 +164,3 @@ This allows us to share data appwise instead of using props in components that h
     </BookContext.Provider>
 ```
 3. 'Consume' the data in a component
-
