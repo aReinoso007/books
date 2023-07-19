@@ -157,9 +157,12 @@ This allows us to share data appwise instead of using props in components that h
     <BookContext.Provider />
     */
 ```
-2. Specify the data that will be shared.
+2. Book Provider
 So here we can do some data fetching and CRUD operations in Book Context like so:
 ```javascript
+    function Provider({children}){
+    const [books, setBooks] = useState([]);
+
     const fetchBooks = async ()=>{
         const response = await axios.get('http://localhost:3001/books');
         setBooks(response.data)
@@ -199,6 +202,21 @@ So here we can do some data fetching and CRUD operations in Book Context like so
         });
         setBooks(updatedBooks)
     }
+
+    const valueToShare = {
+        books,
+        deleteBookById,
+        editBookById,
+        createBook,
+        fetchBooks
+    }
+
+    return (
+        <BooksContext.Provider value={valueToShare}>
+            {children}
+        </BooksContext.Provider>
+    )
+}
 ```
 What we want to do with the previous is share in the context so we do it like so:
 ```javascript
