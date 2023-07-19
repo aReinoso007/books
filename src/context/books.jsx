@@ -11,7 +11,7 @@ function Provider({children}){
         setBooks(response.data)
     }
 
-    const handleBookCreate= async (title) =>{
+    const createBook= async (title) =>{
 
         const response  = await axios.post('http://localhost:3001/books',
         {
@@ -46,8 +46,16 @@ function Provider({children}){
         setBooks(updatedBooks)
     }
 
+    const valueToShare = {
+        books: books,
+        deleteBookById,
+        editBookById,
+        createBook,
+        fetchBooks
+    }
+
     return (
-        <BooksContext.Provider value={{}}>
+        <BooksContext.Provider value={valueToShare}>
             {children}
         </BooksContext.Provider>
     )
