@@ -158,9 +158,80 @@ This allows us to share data appwise instead of using props in components that h
     */
 ```
 2. Specify the data that will be shared.
+So here we can do some data fetching and CRUD operations in Book Context like so:
+```javascript
+    const fetchBooks = async ()=>{
+        const response = await axios.get('http://localhost:3001/books');
+        setBooks(response.data)
+    }
+
+    const createBook= async (title) =>{
+
+        const response  = await axios.post('http://localhost:3001/books',
+        {
+           title
+        });
+       const updatedBooks = [
+            ...books,
+            response.data
+        ]
+        setBooks(updatedBooks)
+    }
+
+    const editBookById = async (id, newTitle)=>{
+        const response = await axios.put('http://localhost:3001/books/'+id,{
+            title: newTitle
+        })
+        const updatedBooks =  books.map((book)=>{
+            if(book.id === id){
+                return {...book, ...response.data}
+            }
+            return book;
+        });
+        setBooks(updatedBooks)
+    }
+
+    const deleteBookById = async (id) =>{
+        const response = await axios.delete(`http://localhost:3001/books/${id}`)
+
+        const updatedBooks = books.filter((book)=>{
+            return book.id !== id;
+        });
+        setBooks(updatedBooks)
+    }
+```
+What we want to do with the previous is share in the context so we do it like so:
+```javascript
+    const valueToShare = {
+        books,
+        deleteBookById,
+        editBookById,
+        createBook,
+        fetchBooks
+    }
+```
 ```javascript
     <BookContext.Provider value={5}>
         <MyComponent />
     </BookContext.Provider>
 ```
 3. 'Consume' the data in a component
+So now we want to get the book list that is fetched from the API
+```javascript
+    //BookList component
+    const { books } = useContext(BooksContext);
+
+    const renderedBooks = books.map((book)=>{
+        return <BookShow key={book.id} book={book} />;
+    })
+```
+
+Let's delete a book by it's ID, the BookShow Component still receives a ```book``` prop
+```javascript
+    const { deleteBookById } = useContext(BooksContext);
+    const [showEdit, setShowEdit] = useState(false)
+
+    const handleDeleteClick = ()=>{
+        deleteBookById(book.id)
+    }
+```
