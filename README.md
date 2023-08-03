@@ -253,3 +253,11 @@ Let's delete a book by it's ID, the BookShow Component still receives a ```book`
         deleteBookById(book.id)
     }
 ```
+## Notes on ```useEffect()``` hook.
+Possible bug anytime in ```useEffect()``` contains a function that refers to a variable, 
+so we get a Stale Variable Ref that can be fixed like so: 
+```javascript
+    useEffect(()=>{
+
+    },[variableToKeepTrack])
+```
