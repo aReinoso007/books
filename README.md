@@ -261,3 +261,62 @@ so we get a Stale Variable Ref that can be fixed like so:
 
     },[variableToKeepTrack])
 ```
+When we use context:
+this will cause a bug and ESLINT will want us to do it like so:
+```javascript
+const {fetchBooks} = useBooksContext();
+
+    useEffect(()=>{
+        fetchBooks();
+    }, [fetchBooks])
+```
+However fetchBooks refers to totally different functions we will get an infinite loop. 
+
+So to fix this, we need to tell react that fetchBooks wont change between renders, so we use ```useCallBack``` hook to tell react that is not changing overtime.
+
+So in the provider we modify it like so:
+
+```javascript
+const fetchBooks = useCallback(async ()=>{
+        const response = await axios.get('http://localhost:3001/books');
+        setBooks(response.data)
+    }, []);
+```
+
+### Tricky things around ```useEffect```
+* Can't return numbers:
+    ```javascript
+        function App(){
+            useEffect(()=>{
+                return 5
+            }, [])
+        }
+    ```
+* Can't return strings:
+    ```javascript
+        function App(){
+            useEffect(()=>{
+                return 'hey bro'
+            }, [])
+        }
+    ```
+* Can't use async/await
+    * Can't return numbers:
+    ```javascript
+        function App(){
+            useEffect(async ()=>{
+                const res = await axios.get('..')
+            }, [])
+        }
+    ```
+* IT CAN RETURN A FUNCTION!!!
+    * Can't return numbers:
+    ```javascript
+        function App(){
+            useEffect(()=>{
+                return ()=>{
+                    console.log('Correct')
+                }
+            }, [])
+        }
+    ```
